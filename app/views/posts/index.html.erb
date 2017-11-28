@@ -1,0 +1,50 @@
+<!-- secondary Navigation-->
+
+  <div class="name">
+    <h4>MANAGE Posts</h4>
+  </div>
+<div class="container pb20">
+  <div class="tab-content mt20">
+    <div id="all" class="tab-pane fade in active">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table cellspacing="0" width="100%">
+              <thead>
+                  <tr>
+                    <th>
+                      Title </th>
+                      <th>
+                      Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+            <% if @posts.present? %>
+              <% @posts.each do |post| %>
+              <tr>
+              <td><%= post.name %></td>
+              <td class="actioncell pb10">
+              <%= link_to 'show', post_path(post) %>
+              <%= link_to 'edit', edit_post_path(post, page: params[:page]) %>
+              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+             <% end %>
+            <% else %>
+              <tr>
+              <td colspan="6" class="center">No post found.</td>
+              </tr>
+            <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+
+<br>
+<% if can? :create, Post %>
+  <%= link_to 'New Post', new_post_path %>
+<% end %>
